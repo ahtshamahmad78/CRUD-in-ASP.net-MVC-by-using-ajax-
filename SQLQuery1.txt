@@ -1,0 +1,129 @@
+CREATE TABLE empl (
+  id INT identity(1,1) PRIMARY KEY ,
+  name VARCHAR(50) NOT NULL,
+  age INT,
+  gender VARCHAR(10),
+  city VARCHAR(50),
+  salary DECIMAL(10,2)
+);
+INSERT INTO empl ( name, age, gender, city, salary) VALUES
+( 'John Doe', 35, 'Male', 'New York', 5000.00),
+( 'Jane Smith', 28, 'Female', 'Los Angeles', 6000.50),
+( 'Bob Johnson', 42, 'Male', 'Chicago', 8000.75),
+( 'Sarah Lee', 31, 'Female', 'San Francisco', 7000.25);
+
+
+
+create procedure ademp
+(
+@name varchar(50),
+@age int,
+@gender varchar(50),
+@city varchar(50),
+@salary int
+
+)
+as begin 
+Insert Into empl(name,age,gender,city,salary)Values(@name,@age,@gender,@city,@salary)
+end
+execute ademp 'ahtsm',23,'male','grw',54536;
+select * from empl
+
+create procedure upemp
+(
+@id int ,
+@name varchar(50),
+@age int,
+@gender varchar(50),
+@city varchar(50),
+@salary int
+
+
+)
+as begin 
+update empl set name = @name, age = @age , gender = @gender , city = @city , salary = @salary where id = @id
+end
+execute upemp  3,'Bob Johnson',42,'male','grw',54536;
+
+create procedure delemp
+(
+@id int 
+
+)
+as begin 
+delete  from empl where id = @id
+end
+execute delemp 2;
+CREATE PROCEDURE SelectAllah
+AS
+SELECT * FROM empl
+GO;
+
+create database Employee
+create Table dbo.Employee
+(
+EmployeeID INT IDENTITY NOT NULL,
+Name NVARCHAR(50),
+AGE INT,
+State NVARCHAR(50),
+Country NVARCHAR(50),
+Constraint PK_Employee Primary key(EmployeeID)
+
+)
+GO
+
+create procedure SelectEmployee    
+as 
+begin
+Select * from Employee;
+end
+-------------------------------------
+create procedure InsertUpdateEmployee    
+(
+@ID interger,
+@Name NVARCHAR(50),
+@Name interger,
+@State NVARCHAR(50),
+@Country NVARCHAR(50),
+@Action NVARCHAR(50),
+) 
+AS
+Begin 
+@if @Action='Insert'
+Begin Insert into Employee(Name,Age,[State],Country)values(@Name,@Name,@State,@Country)
+End
+@if @Action='update'
+Begin
+update Employee set Name=@Name,Age=@Age,[State]=@[State],Country=@Country where EmployeeID=@ID;
+end
+end
+
+---------------------
+Create Procedure InsertUpdateEmployee    
+(    
+@Id integer,    
+@Name nvarchar(50),    
+@Age integer,    
+@State nvarchar(50),    
+@Country nvarchar(50),    
+@Action varchar(10)    
+)    
+As    
+Begin    
+if @Action='Insert'    
+Begin    
+ Insert into Employee(Name,Age,[State],Country) values(@Name,@Age,@State,@Country);    
+End    
+if @Action='Update'    
+Begin    
+ Update Employee set Name=@Name,Age=@Age,[State]=@State,Country=@Country where EmployeeID=@Id;    
+End      
+End  
+------------------------------------------------------------------
+create procedure DeleteEmployee    
+(
+@ID integer
+)
+as begin
+Delete Employee where  EmployeeID=@Id;
+END
